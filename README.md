@@ -75,3 +75,40 @@ Many people helped the project along the way, thank you to all of you!
 
 espanso was created by [Federico Terzi](http://federicoterzi.com)
 and is licensed under the [GPL-3.0 license](/LICENSE).
+
+## Text Injection Functionality
+
+The text injection functionality in espanso is responsible for injecting text into the user's input field. This functionality is implemented using the `TextInjectExecutor` struct and the `TextInjector` trait.
+
+### TextInjectExecutor
+
+The `TextInjectExecutor` struct is responsible for injecting text into the user's input field. It uses two injectors: `event_injector` and `clipboard_injector`.
+
+Relevant file: `espanso-engine/src/dispatch/executor/text_inject.rs`
+
+### TextInjector Trait
+
+The `TextInjector` trait defines the `inject_text` method, which is used to inject text.
+
+Relevant file: `espanso-engine/src/dispatch/executor/text_inject.rs`
+
+### ClipboardInjector and EventInjector
+
+The `ClipboardInjector` and `EventInjector` structs implement the `TextInjector` trait. They are responsible for injecting text using the clipboard and event methods, respectively.
+
+Relevant files:
+- `espanso/src/cli/worker/engine/dispatch/executor/clipboard_injector.rs`
+- `espanso/src/cli/worker/engine/dispatch/executor/event_injector.rs`
+
+### Relevant Files and Their Roles
+
+- `espanso-engine/src/dispatch/executor/text_inject.rs`: Contains the `TextInjectExecutor` struct and the `TextInjector` trait.
+- `espanso-engine/src/dispatch/executor/mod.rs`: Re-exports the `TextInjector` trait.
+- `espanso-engine/src/dispatch/mod.rs`: Re-exports the `text_inject` module.
+- `espanso/src/cli/worker/engine/dispatch/executor/mod.rs`: Contains the `InjectParamsProvider` trait, which provides parameters for text injection.
+- `espanso/src/cli/worker/engine/dispatch/executor/clipboard_injector.rs`: Contains the `ClipboardInjector` struct, which implements the `TextInjector` trait.
+- `espanso/src/cli/worker/engine/dispatch/executor/event_injector.rs`: Contains the `EventInjector` struct, which implements the `TextInjector` trait.
+- `espanso/src/cli/worker/engine/dispatch/mod.rs`: Re-exports the `executor` module.
+- `espanso/src/cli/worker/engine/mod.rs`: Re-exports the `dispatch` module.
+- `espanso/src/cli/worker/mod.rs`: Re-exports the `engine` module.
+- `espanso/src/main.rs`: Initializes and runs the application, which includes the text injection functionality.
