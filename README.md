@@ -112,3 +112,9 @@ Relevant files:
 - `espanso/src/cli/worker/engine/mod.rs`: Re-exports the `dispatch` module.
 - `espanso/src/cli/worker/mod.rs`: Re-exports the `engine` module.
 - `espanso/src/main.rs`: Initializes and runs the application, which includes the text injection functionality.
+
+### Special Case for Linux Terminal Text Injection
+
+In the case of Linux terminal text injection, there is a special handling mechanism. When the `TextInjectExecutor` struct is used to inject text, it checks if the target operating system is Linux. If it is, and the text to be injected is ASCII, the `event_injector` is used. Otherwise, the `clipboard_injector` is used.
+
+Relevant file: `espanso-engine/src/dispatch/executor/text_inject.rs`
