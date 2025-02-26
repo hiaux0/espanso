@@ -118,3 +118,15 @@ Relevant files:
 In the case of Linux terminal text injection, there is a special handling mechanism. When the `TextInjectExecutor` struct is used to inject text, it checks if the target operating system is Linux. If it is, and the text to be injected is ASCII, the `event_injector` is used. Otherwise, the `clipboard_injector` is used.
 
 Relevant file: `espanso-engine/src/dispatch/executor/text_inject.rs`
+
+### How TextInjector Achieves Text Injection
+
+The `TextInjector` trait defines the `inject_text` method, which is implemented by both the `ClipboardInjector` and `EventInjector` structs. The `inject_text` method is responsible for injecting text into the user's input field.
+
+The `ClipboardInjector` struct uses the clipboard to inject text. It sets the clipboard content to the text to be injected and then sends a paste command to the target application.
+
+The `EventInjector` struct uses keyboard events to inject text. It simulates key presses to type the text into the target application.
+
+Relevant files:
+- `espanso/src/cli/worker/engine/dispatch/executor/clipboard_injector.rs`
+- `espanso/src/cli/worker/engine/dispatch/executor/event_injector.rs`
